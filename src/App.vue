@@ -1,9 +1,11 @@
 <script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
+import Nav from './components/Nav.vue'
+import Main from './Main.vue'
 </script>
 
 <template>
-  <HelloWorld msg="Vite + Vue" />
+  <Nav></Nav>
+  <Main></Main>
 </template>
 
 <style scoped>
