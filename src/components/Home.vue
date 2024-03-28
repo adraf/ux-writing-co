@@ -19,6 +19,14 @@
   h1 {
     font-family: "Unna", serif;
     font-weight: 700;
+    max-width: 800px;
+    margin: 20px auto;
+  }
+
+  .home__article {
+    height: 80vh;
+    max-width: 800px;
+    margin: 20px auto;
   }
 
 </style>
