@@ -5,16 +5,19 @@
   import About from './components/About.vue'
   import Work from './components/Work.vue'
   import Contact from './components/Contact.vue'
-
+  import Footer from './components/Footer.vue'
 </script>
 
 <template>
-  <Home></Home>
-  <Service></Service>
-  <Process></Process>
-  <About></About>
-  <Work></Work>
-  <Contact></Contact>
+  <main id="main__body">
+    <Home></Home>
+    <Service></Service>
+    <Process></Process>
+    <About></About>
+    <Work></Work>
+    <Contact></Contact>
+    <Footer></Footer>
+  </main>
 </template>
 
 <style scoped>

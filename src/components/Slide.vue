@@ -28,7 +28,7 @@
   </Carousel>
 </template>
 
-<style>
+<style scoped>
 
   .carousel__wrapper {
     width: 95%;

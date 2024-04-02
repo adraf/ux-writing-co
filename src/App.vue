@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import Nav from './components/Nav.vue'
-import Main from './Main.vue'
+  import Nav from './components/Nav.vue'
+  import Main from './Main.vue'
 </script>
 
 <template>

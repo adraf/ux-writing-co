@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <section class="about__container">
+  <section class="about__container" id="scrollTo_about">
     <div class="about__image image-left"></div>
     <article class="about__article">
       <h2>And we are?</h2>
@@ -15,7 +15,7 @@
   </section>
 </template>
 
-<style>
+<style scoped>
   .about__container {
     display: flex;
     justify-content: space-between;

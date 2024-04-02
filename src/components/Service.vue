@@ -3,8 +3,7 @@
 </script>
 
 <template>
-  <!-- <h2>Services</h2> -->
-  <section class="services__section">
+  <section class="services__section" id="scrollTo_services">
     <article class="services__article">
       <img class="services__image" src="../images/iconmonstr-speech-bubble-26-240.png" alt="">
       <div class="servives__article_text-box">
@@ -29,11 +28,11 @@
   </section>
 </template>
 
-<style>
+<style scoped>
   .services__section {
     display: flex;
     width: 100%;
-    height: 70vh;
+    height: 90vh;
     justify-content: space-evenly;
   }
 
