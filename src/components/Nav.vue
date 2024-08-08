@@ -1,5 +1,5 @@
 <script>
-  import { watchEffect } from 'vue'
+  import { ref } from 'vue'
 
   document.addEventListener("DOMContentLoaded", () => {
 
@@ -15,12 +15,12 @@
   
     const onIntersect = (entries) => {
       entries.forEach((entry) => {
-        console.log('WHAMMY', sections, entry)
+        // console.log('NAV', sections, entry)
       })
     }
   
     const observer = new IntersectionObserver(onIntersect, options)
-  
+
     sections.forEach((section) => {
       observer.observe(section)
     })
@@ -30,21 +30,26 @@
   // controls the nav bar and scrolling to relevant sections.
   export default {
     methods: {
-      scrollToSection() {
+      scrollToSection(event) {
+        const allNavTitles = document.querySelectorAll('.nav__list_item')
+        allNavTitles.forEach((navTitle) => {
+          navTitle.classList.remove('activeNavTitle')
+        })
+        navSection.value = document.getElementById(event.target.id)
+        
+        
         const goToId = 'scrollTo_' + event.target.id
         const goToSection = document.getElementById(goToId);
         goToSection.scrollIntoView({ behavior: 'smooth' });
+        
+        
+        navSection.value.classList.add('activeNavTitle')
       },
       
     }
   }
+  const navSection = ref('')
 
-  // watchEffect(function trialFunc() {
-  //   const procHead = document.querySelector('.process__heading')
-  //   if (procHead) {
-  //     console.log('PROCESS')
-  //   }
-  // })
 
 
 </script>
@@ -79,6 +84,11 @@
     height: 100%;
     flex-direction: column;
     justify-content: space-evenly;
+  }
+
+  .activeNavTitle {
+    font-weight: bold;
+    transition: 0.5s ease-in-out;
   }
 
 </style>

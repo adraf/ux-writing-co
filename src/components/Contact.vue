@@ -37,8 +37,6 @@
     border-radius: 5px;
   }
 
-
-
   #input_message {
     resize: none;
     font-family: inherit;
