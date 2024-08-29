@@ -1,8 +1,28 @@
 <script setup>
+  import { ref } from 'vue'
+  import { useIntersectionObserver } from '@vueuse/core'
+
+  const emit = defineEmits(['section-in-view'])
+  const target = ref(null)
+  const targetIsVisible = ref(false)
+  // const component = 'process'
+
+const { stop } = useIntersectionObserver(
+    target, 
+    ([{ isIntersecting }], observerElement) => {
+      targetIsVisible.value = isIntersecting
+
+      if (isIntersecting) {
+        emit('section-in-view', target.value.id)
+        console.log('TARGET', targetIsVisible.value, target.value.id)
+      }
+    },
+    { threshold: 0.8 }, {immediate: false}
+  )
 </script>
 
 <template>
-  <section data-section="process" id="scrollTo_process" class="process_container_all">
+  <section ref="target" id="scrollTo_process" class="process_container_all">
     <article class="process__container">
       <h2 class="process__heading">How we work</h2>
       <p class="process__text">Realising a unique vision takes flexibility, so consider us your content design Swiss army-knife.</p>

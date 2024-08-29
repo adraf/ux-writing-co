@@ -6,45 +6,30 @@
   import Work from './components/Work.vue'
   import Contact from './components/Contact.vue'
   import Footer from './components/Footer.vue'
+  import { ref, watchEffect } from 'vue'
+  const emit = defineEmits(['component-in-view'])
+  const componentForNav = ref('')
+  const sectionInView = (sectionInView) => {
+    componentForNav.value = sectionInView
+    console.log('sectionInView, MAIN', sectionInView)
+  }
 
-  import { ref, onMounted } from 'vue'
-  import { useIntersectionObserver } from '@vueuse/core'
-
-  const emit = defineEmits(['section-in-view'])
-  const home = ref(null)
-  const service = ref(null)
-  const process = ref(null)
-  const about = ref(null)
-  const workSection = ref(null)
-  const contact = ref(null)
-  const targetIsVisible = ref(false)
-
-  onMounted(() => console.log(workSection, contact)
-);
-
-  const sections = [home, service, process, about, contact, workSection]
-  const { stop } = useIntersectionObserver(
-    sections, 
-    ([{ isIntersecting }], observerElement) => {
-      targetIsVisible.value = isIntersecting
-      if (isIntersecting) {
-        emit('section-in-view', observerElement)
-        console.log('TARGET', targetIsVisible.value, observerElement, sections)
-      }
-    },
-    { threshold: 0.8 }, {immediate: false}
-  )
+  watchEffect(() => {
+    componentForNav.value,
+    emit('component-in-view', componentForNav.value)
+    console.log('componentForNav, MAIN', componentForNav.value)
+  })
 
 </script>
 
 <template>
   <main id="main__body">
-    <Home ref="home"></Home>
-    <Service ref="service"></Service>
-    <Process ref="process"></Process>
-    <About ref="about"></About>
-    <Work ref="workSection"></Work>
-    <Contact ref="contact"></Contact>
+    <Home ref="home" @section-in-view="sectionInView"></Home>
+    <Service ref="service" @section-in-view="sectionInView"></Service>
+    <Process ref="process" @section-in-view="sectionInView"></Process>
+    <About ref="about" @section-in-view="sectionInView"></About>
+    <Work ref="workSection" @section-in-view="sectionInView"></Work>
+    <Contact ref="contact" @section-in-view="sectionInView"></Contact>
     <Footer></Footer>
   </main>
 </template>

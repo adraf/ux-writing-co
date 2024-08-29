@@ -1,9 +1,27 @@
-<script setup lang="ts">
+<script setup>
+  import { ref } from 'vue'
+  import { useIntersectionObserver } from '@vueuse/core'
 
+  const emit = defineEmits(['section-in-view'])
+  const target = ref(null)
+  const targetIsVisible = ref(false)
+
+const { stop } = useIntersectionObserver(
+    target, 
+    ([{ isIntersecting }], observerElement) => {
+      targetIsVisible.value = isIntersecting
+
+      if (isIntersecting) {
+        emit('section-in-view', target.value.id)
+        console.log('TARGET', targetIsVisible.value)
+      }
+    },
+    { threshold: 0.8 }, {immediate: false}
+  )
 </script>
 
 <template>
-  <section class="about__container" id="scrollTo_about">
+  <section ref="target" class="about__container" id="scrollTo_about">
     <div class="about__image image-left"></div>
     <article class="about__article">
       <h2>And we are?</h2>

@@ -1,5 +1,5 @@
 <script>
-  import { ref } from 'vue'
+  import { ref, watchEffect } from 'vue'
 
   document.addEventListener("DOMContentLoaded", () => {
 
@@ -31,26 +31,41 @@
   export default {
     methods: {
       scrollToSection(event) {
-        const allNavTitles = document.querySelectorAll('.nav__list_item')
-        allNavTitles.forEach((navTitle) => {
-          navTitle.classList.remove('activeNavTitle')
-        })
-        navSection.value = document.getElementById(event.target.id)
-        
-        
+        boldFunc(event.target.id)
         const goToId = 'scrollTo_' + event.target.id
         const goToSection = document.getElementById(goToId);
         goToSection.scrollIntoView({ behavior: 'smooth' });
-        
-        
-        navSection.value.classList.add('activeNavTitle')
-      },
-      
+      },   
+    },
+    props: {
+      componentForNav: String,
+    },
+    setup(props) {
+      watchEffect(() => {
+        console.log('PROP', props.componentForNav)
+        if (props.componentForNav !== '') {
+          scrollToSectionScroll(props.componentForNav)
+        }
+      })
     }
   }
   const navSection = ref('')
 
+  const scrollToSectionScroll = (event) => {
+    event = event.split('').splice(9).join('')
+    console.log('EVENTNAME', event)
+    boldFunc(event)
+  }
 
+  const boldFunc = (sectionId) => {
+    // console.log('hit bold func', sectionId)
+    const allNavTitles = document.querySelectorAll('.nav__list_item')
+    allNavTitles.forEach((navTitle) => {
+      navTitle.classList.remove('activeNavTitle')
+    })
+    const thisSection = document.getElementById(sectionId)
+    thisSection.classList.add('activeNavTitle')
+  }
 
 </script>
 
