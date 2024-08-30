@@ -3,6 +3,6 @@ import vue from '@vitejs/plugin-vue'
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  base: '/ux-writing-co/',
   plugins: [vue()],
-  base: '/ux-writing-co/'
 })
