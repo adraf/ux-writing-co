@@ -94,7 +94,7 @@ const { stop } = useIntersectionObserver(
       top: 0; 
       left: 0;
       transform: translate(0, 0);
-      /* background-color: var(--background-color); */
+      background-color: unset !important;
       padding: 2rem 0 0 0;
     }
     

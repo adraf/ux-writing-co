@@ -106,9 +106,28 @@ const { stop } = useIntersectionObserver(
     right: 0;
     bottom: -50px;
   }
-  
+
   @media (max-width: 768px) {
-    
+    .process__container {
+      padding: 0;
+    }
+    .testimonials__container {
+      flex-direction: column;
+    }
+    .testimonials__single-box {
+      width: 90%;
+      margin-top: 2rem;
+      height: auto;
+    }
+    .testimonials__quote-icons {
+      font-size: 100px;
+    }
+    .start-quote {
+      top: 20px;
+    }
+    .end-quote {
+      bottom: -15px;
+    }
   }
 
 
