@@ -106,4 +106,21 @@
     transition: 0.5s ease-in-out;
   }
 
+  @media (max-width: 768px) {
+    .nav__main {
+    position: sticky;
+    display: flex;
+    top: 0;
+    margin: auto 0;
+    height: 50px;
+    background-color: var(--background-color);
+    z-index: 2;
+  }
+  .nav__list {
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-evenly;
+  }
+}
+
 </style>

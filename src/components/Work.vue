@@ -61,4 +61,8 @@ const { stop } = useIntersectionObserver(
     width: 150px;
     padding: 15px;
   }
+
+  @media (max-width: 768px) {
+    
+  }
 </style>

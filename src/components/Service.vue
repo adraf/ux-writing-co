@@ -76,4 +76,31 @@ const { stop } = useIntersectionObserver(
   .servives__article_text-box {
     min-height: 40vh;
   }
+
+  @media (max-width: 768px) {
+    .services__section {
+      flex-direction: column;
+      height: 100vh;
+      padding-top: 6vh;
+    }
+
+    .services__article {
+      flex-direction: column;
+      width: 100%;
+      margin: 0 auto;
+      height: 16rem !important;
+    } 
+
+    .services__image {
+      width: 60px;
+      max-width: 100px;
+      height: 60px;
+    }
+
+    .servives__article_text-box {
+      min-height: min-content;
+      padding-bottom: 2rem;
+    }
+
+  }
 </style>

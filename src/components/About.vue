@@ -22,13 +22,17 @@ const { stop } = useIntersectionObserver(
 
 <template>
   <section ref="target" class="about__container" id="scrollTo_about">
-    <div class="about__image image-left"></div>
     <article class="about__article">
       <h2>And we are?</h2>
       <p class="about__text">Glad you asked...</p>
       <p class="about__text">The short answer is that we&#39;re a collection of multi-disciplinary word nerds that have held nearly every type of job you could think of in the world of commercial writing.</p>
       <p class="about__text">We set up The UX Writing Company after realising just how many passionate teams, startups and products were being held back by imperfect copy. Since then we've made it our mission to help businesses of all shapes and sizes to realise their creative vision and deliver the best possible product into a competitive and noisy marketplace.</p>    
     </article>
+    <div class="mobile-images">
+      <div class="about__image_mobile image-left"></div>
+      <div class="about__image_mobile image-right"></div>
+    </div>
+    <div class="about__image image-left"></div>
     <div class="about__image image-right"></div>
   </section>
 </template>
@@ -56,6 +60,10 @@ const { stop } = useIntersectionObserver(
     padding: 20px;
   }
 
+  .mobile-images {
+    display: none;
+  }
+
   .about__image { 
     height: 90%;
     width: 400px;
@@ -72,5 +80,42 @@ const { stop } = useIntersectionObserver(
     background-image: url(https://static.wixstatic.com/media/35b914_1c5c3753019343f9ba3165e2f6ae8827~mv2_d_1520_1212_s_2.jpg/v1/fill/w_490,h_851,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/35b914_1c5c3753019343f9ba3165e2f6ae8827~mv2_d_1520_1212_s_2.jpg);
     background-position: right;
   }
+  
+  @media (max-width: 768px) {
+    .about__container {
+      flex-direction: column;
+      height: 90vh;
+      margin: 4rem auto 0 auto;
+    }
+    .about__article {
+      z-index: 0;
+      position: relative;
+      width: 100%;
+      top: 0; 
+      left: 0;
+      transform: translate(0, 0);
+      /* background-color: var(--background-color); */
+      padding: 2rem 0 0 0;
+    }
+    
+    .about__image {
+      display: none;
+    }
 
+    .mobile-images {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      height: auto;
+    }
+
+    .about__image_mobile { 
+      width: 30vw;
+      height: 30vh;
+      background-position: 0% 25%;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+  }
 </style>
