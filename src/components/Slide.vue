@@ -101,5 +101,12 @@
  
   }
 
+  @media (max-width: 768px) {
+    .carousel__wrapper {
+      width: calc(100% + 3rem);
+      margin-left: -1.5rem;
+    }
+  }
+
 </style>
 

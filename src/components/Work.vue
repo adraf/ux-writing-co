@@ -38,7 +38,7 @@ const { stop } = useIntersectionObserver(
   <!-- carousel + info -->
   <section ref="target" class="work__company_section mx-auto align-content-evenly" id="scrollTo_work">
     <Slide :clicked-slide="clickedSlide"></Slide>
-    <div class="work_company_section_badge_conatiner flex align-items-center justify-content-center justify-content-evenly mx-auto flex-wrap w-10 h-10rem gap-3">
+    <div class="work_company_section_badge_conatiner flex align-items-center justify-content-center justify-content-evenly mx-auto flex-wrap md:w-10 md:h-10rem gap-3">
       <button
         v-for="work in work" :key="work.id"
         @click="chosenSlide(work)"
@@ -63,6 +63,8 @@ const { stop } = useIntersectionObserver(
   }
 
   @media (max-width: 768px) {
-    
+    .work__company_section {
+      width: 100%;
+    }
   }
 </style>

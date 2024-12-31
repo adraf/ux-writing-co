@@ -80,15 +80,17 @@ const { stop } = useIntersectionObserver(
   @media (max-width: 768px) {
     .services__section {
       flex-direction: column;
-      height: 100vh;
-      padding-top: 6vh;
+      justify-content: space-between;
+      height: 110vh;
+      margin: 60px auto;
+      padding-top: 60px;
     }
 
     .services__article {
       flex-direction: column;
       width: 100%;
       margin: 0 auto;
-      height: 16rem !important;
+      /* height: 16rem !important; */
     } 
 
     .services__image {

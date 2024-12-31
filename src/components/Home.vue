@@ -58,4 +58,14 @@ const { stop } = useIntersectionObserver(
     /* margin: 20px auto; */
   }
 
+  @media (max-width: 768px) {
+    .home__container {
+      height: 90vh;
+      /* margin-bottom: 20vh; */
+      padding-top: 20px;
+    }
+    h1 {
+      font-size: 2rem;
+    }
+  }
 </style>

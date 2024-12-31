@@ -86,6 +86,7 @@ const { stop } = useIntersectionObserver(
       flex-direction: column;
       height: 90vh;
       margin: 4rem auto 0 auto;
+      padding-top: 20px;
     }
     .about__article {
       z-index: 0;

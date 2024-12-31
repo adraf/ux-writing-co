@@ -6,6 +6,27 @@
   const target = ref(null)
   const targetIsVisible = ref(false)
 
+  const form = ref({
+    email: '',
+    name: '',
+    subject: '',
+    message: '',
+  })
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    console.log(form.value)
+    // TODO:  once for is submitted, clear the fields - 
+    clearFields()
+  }
+
+  const clearFields = () => {
+    form.value.email = ''
+    form.value.name = ''
+    form.value.subject = ''
+    form.value.message = ''
+  }
+
 const { stop } = useIntersectionObserver(
     target, 
     ([{ isIntersecting }], observerElement) => {
@@ -22,12 +43,12 @@ const { stop } = useIntersectionObserver(
 
 <template>
   <section ref="target" id="scrollTo_contact" class="contact__container">
-    <form class="contact__form" ref="contact">
-      <input class="contact__form_input" id="input_name" type="text" name="name" placeholder="Name" aria-label="Name" required>
-      <input class="contact__form_input" id="input_email" type="email" name="email" placeholder="Email" aria-label="Email" required>
-      <input class="contact__form_input" id="input_subject" type="text" name="subject" placeholder="Subject" aria-label="Subject" required>
-      <textarea class="contact__form_input" id="input_message" aria-label="Message" name="message" form="scrollTo_contact" cols="30" rows="10" placeholder="Message"></textarea>
-      <input class="contact__form_input" id="input_submit" type="submit" value="Send" aria-label="Send">
+    <form class="contact__form" ref="contact" @submit.prevent>
+      <input v-model="form.name" class="contact__form_input" id="input_name" type="text" name="name" placeholder="Name" aria-label="Name" required>
+      <input v-model="form.email" class="contact__form_input" id="input_email" type="email" name="email" placeholder="Email" aria-label="Email" required>
+      <input v-model="form.subject" class="contact__form_input" id="input_subject" type="text" name="subject" placeholder="Subject" aria-label="Subject" required>
+      <textarea v-model="form.message" class="contact__form_input" id="input_message" aria-label="Message" name="message" form="scrollTo_contact" cols="30" rows="10" placeholder="Message"></textarea>
+      <input @click="onSubmit" class="contact__form_input" id="input_submit" type="submit" value="Send" aria-label="Send">
     </form>
   </section>
 </template>
@@ -60,4 +81,13 @@ const { stop } = useIntersectionObserver(
     font-family: inherit;
   }
 
+@media (max-width: 768px) {
+  .contact__container {
+    height: 70vh;
+  }
+
+  .contact__form {
+    width: 85vw;
+  }
+}
 </style>

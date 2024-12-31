@@ -115,6 +115,8 @@
     height: 50px;
     background-color: var(--background-color);
     z-index: 2;
+    width: 100vw;
+    margin-left: -1.5rem;
   }
   .nav__list {
     flex-direction: row;
