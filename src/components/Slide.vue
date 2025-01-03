@@ -5,7 +5,7 @@
   import { defineComponent, onMounted, ref, defineProps, watchEffect } from 'vue'
   import { Carousel, Navigation, Slide } from 'vue3-carousel'
   import 'vue3-carousel/dist/carousel.css'
-  
+
   import Work from '../helpers/work'
   
   export default defineComponent({
@@ -18,8 +18,8 @@
   })
   
 </script>
-<script setup>
-
+  <script setup>
+  const emit = defineEmits(['open-work-info'])
   const props = defineProps({
     clickedSlide: {
       type: Object,
@@ -36,19 +36,27 @@
     }
   }, { props })
 
+  const openWork = (workItem) => {
+    console.log('EMIT ITEM', workItem)
+    emit('open-work-info', workItem)
+  }
+
   const workCarousel = ref(null)
   const work = Work
+  const visible = ref(false);
 
 </script>
 
 <template>
   <Carousel ref="workCarousel" :items-to-show="2.25" :wrap-around="true" :autoplay="2500" class="carousel__wrapper" :transition="1000">
-    <Slide v-for="workItem in work" :key="workItem.id">
+    <Slide v-for="workItem in work" :key="workItem.id" @click="openWork(workItem)">
       <div 
         :style="`background-image: url('${workItem.logo}');`"
         class="carousel__item"
       >
-      {{ workItem.name }}
+        <div class="backdropBlur" style="backdrop-filter: blur(2px);">
+          {{ workItem.name }}
+        </div>
       </div>
     </Slide>
 
@@ -56,6 +64,7 @@
       <Navigation />
     </template>
   </Carousel>
+
 </template>
 
 <style scoped>
@@ -69,14 +78,26 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 250px;
+    min-height: 16rem;
     width: 100%;
-    /* background-image: url('src/images/placeholder.png'); */
     background-position: center;
     background-size: cover;
-    /* background-color: var(--vc-clr-primary);
-    color: var(--vc-clr-white); */
-    /* font-size: 20px; */
+    border-radius: 8px;
+    position: relative;
+  }
+
+  .backdropBlur {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.2);
+    color: white;
+    font-size: 1.5rem;
     border-radius: 8px;
   }
 
@@ -98,13 +119,25 @@
   
   .carousel__next {
     background: linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,1));
- 
+    right: -2.5rem !important;
+  }
+  :deep(.carousel__prev) {
+    left: -2.5rem !important;
+  }
+  :deep(.carousel__next) {
+    right: -2.5rem !important;
   }
 
   @media (max-width: 768px) {
     .carousel__wrapper {
       width: calc(100% + 3rem);
       margin-left: -1.5rem;
+    }
+    :deep(.carousel__prev) {
+      left: 0 !important;
+    }
+    :deep(.carousel__next) {
+      right: 0 !important;
     }
   }
 

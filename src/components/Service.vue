@@ -81,8 +81,8 @@ const { stop } = useIntersectionObserver(
     .services__section {
       flex-direction: column;
       justify-content: space-between;
-      height: 110vh;
-      margin: 60px auto;
+      height: 120vh;
+      margin: 0 auto;
       padding-top: 60px;
     }
 

@@ -109,8 +109,8 @@ const { stop } = useIntersectionObserver(
 
   @media (max-width: 768px) {
     .process_container_all {
-      min-height: 110vh;
-      padding-top: 60px;
+      height: 120vh;
+      padding-top: 20px;
     }
 
     .process__container {

@@ -57,7 +57,7 @@ const { stop } = useIntersectionObserver(
 
   .contact__container {
     display: flex;
-    height: 90vh;
+    height: 80vh;
     justify-content: center;
     align-items: center;
   }
