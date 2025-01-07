@@ -1,13 +1,31 @@
 <script setup>
   import { ref } from 'vue'
   import { useIntersectionObserver } from '@vueuse/core'
+  import { Carousel, Navigation, Slide } from 'vue3-carousel'
+  import 'vue3-carousel/dist/carousel.css'
+  import Testimonials from '../helpers/tesimonials'
 
   const emit = defineEmits(['section-in-view'])
   const target = ref(null)
   const targetIsVisible = ref(false)
-  // const component = 'process'
+  const testimonials = Testimonials
 
-const { stop } = useIntersectionObserver(
+  const windowWidth = ref(window.innerWidth)
+  window.addEventListener('resize', () => {
+    windowWidth.value = window.innerWidth
+    console.log('WINDOW WIDTH', windowWidth.value)
+  })
+
+  const config = {
+    wrapAround: true,
+    // itemsToShow: windowWidth.value > 1220 ? 3.25 : windowWidth.value > 900 ? 2.25 : 1,
+    transition: 1000,
+    autoplay: 2500,
+    snapAlign: 'center'
+  }
+
+
+  const { stop } = useIntersectionObserver(
     target, 
     ([{ isIntersecting }], observerElement) => {
       targetIsVisible.value = isIntersecting
@@ -30,24 +48,21 @@ const { stop } = useIntersectionObserver(
       <p class="process__text">We're equally comfortable settling in for the long haul with a startup as we are with time-sensitive one-off projects, we can offer you the flexibility and cost efficiencies of a freelance UX writer, with the responsiveness and integration of a full-time on-site hire.</p>
       <p class="process__text">In short, the way we work is up to you.</p>
     </article>
-    <div class="testimonials__container">
-      <aside class="testimonials__single-box">
-        <!-- start quote -->
-        <div class="testimonials__quote-icons start-quote">&#x201C;</div>
-        <p class="testimonials__text">Alice and Dominic are highly knowledgeable, creative and skilled copywriters.  We would absolutely recommend The UX Writing Company to anyone looking for a great company to work with.</p>
-        <p class="testimonials__person">Rick Tsing, OneOneDay</p>
-        <!-- end quote -->
-        <div class="testimonials__quote-icons end-quote">&#8221;</div>
-      </aside>
-      <aside class="testimonials__single-box">
-        <!-- start quote -->
-        <div class="testimonials__quote-icons start-quote">&#x201C;</div>
-        <p class="testimonials__text">The best!! Outstanding work. Very prompt and adept microcopy and brand identity creators</p>
-        <p class="testimonials__person">Kongkiat Sermtavisub, Ksip App</p>
-          <!-- end quote -->
-        <div class="testimonials__quote-icons end-quote">&#8221;</div>
-      </aside>
-    </div>
+    <Carousel v-bind="config"
+      :itemsToShow="windowWidth > 1220 ? 3 : windowWidth > 900 ? 2.25 : 1"
+    >
+      <Slide v-for="testimonial in testimonials" :key="testimonial.id" @click="openWork(testimonial)">
+        <aside class="testimonials__single-box">
+          <div class="testimonials__quote-icons start-quote">&#x201C;</div>
+          <p>{{ testimonial.comment }}</p>
+          <p>{{ testimonial.clientName }}, {{ testimonial.company }}</p>
+          <div class="testimonials__quote-icons end-quote">&#8221;</div>
+        </aside>
+      </Slide>
+      <template #addons>
+        <Navigation />
+      </template>
+    </Carousel>
   </section>
 </template>
 
@@ -67,21 +82,20 @@ const { stop } = useIntersectionObserver(
     margin: 0 auto;
   }
   
-  .testimonials__container {
+  /* .testimonials__container {
     height: 40vh;
     max-width: 900px;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
     margin: 0 auto;
-  }
+  } */
 
   .testimonials__single-box {
     position: relative;
     border: 1px solid black;
-    width: 40%;
-    max-width: 450px;
-    height: 60%;
+    width: 20rem;
+    height: 20rem;
     display: flex;
     flex-direction: column;
     text-align: center;
@@ -92,19 +106,19 @@ const { stop } = useIntersectionObserver(
 
   .testimonials__quote-icons {
     position: absolute;
-    font-size: 200px;
+    font-size: 150px;
     font-family: "Unna", serif;
     line-height: 0;
   }
 
   .start-quote {
-    top: 30px;
+    top: 50px;
     left: 0;
   }
 
   .end-quote {
     right: 0;
-    bottom: -50px;
+    bottom: -10px;
   }
 
   @media (max-width: 768px) {
@@ -117,24 +131,24 @@ const { stop } = useIntersectionObserver(
       padding: 0;
       height: auto;
     }
-    .testimonials__container {
+    /* .testimonials__container {
       flex-direction: column;
       height: auto;
-    }
-    .testimonials__single-box {
-      width: 90%;
+    } */
+    /* .testimonials__single-box {
+      width: 20rem;
       margin-top: 2rem;
-      height: auto;
-    }
+      height: 20rem;
+    } */
     .testimonials__quote-icons {
       font-size: 100px;
     }
-    .start-quote {
+    /* .start-quote {
       top: 20px;
     }
     .end-quote {
       bottom: -15px;
-    }
+    } */
   }
 
 

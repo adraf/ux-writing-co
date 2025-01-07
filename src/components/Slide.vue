@@ -1,25 +1,19 @@
-<script>
-  // Had to use a standard script block for defineComponent to work.
-  // Vue3-carousel
-  // https://ismail9k.github.io/vue3-carousel/configs.html
+<script setup>
   import { defineComponent, onMounted, ref, defineProps, watchEffect } from 'vue'
   import { Carousel, Navigation, Slide } from 'vue3-carousel'
   import 'vue3-carousel/dist/carousel.css'
-
   import Work from '../helpers/work'
-  
-  export default defineComponent({
-    name: 'WrapAround',
-    components: {
-      Carousel,
-      Slide,
-      Navigation,
-    }
-  })
-  
-</script>
-  <script setup>
+
+  const config = {
+    wrapAround: true,
+    itemsToShow: 2.25,
+    transition: 1000,
+    autoplay: 2500,
+    snapAlign: 'center',
+  }
+
   const emit = defineEmits(['open-work-info'])
+
   const props = defineProps({
     clickedSlide: {
       type: Object,
@@ -48,7 +42,7 @@
 </script>
 
 <template>
-  <Carousel ref="workCarousel" :items-to-show="2.25" :wrap-around="true" :autoplay="2500" class="carousel__wrapper" :transition="1000">
+  <Carousel ref="workCarousel" v-bind="config" class="carousel__wrapper">
     <Slide v-for="workItem in work" :key="workItem.id" @click="openWork(workItem)">
       <div 
         :style="`background-image: url('${workItem.logo}');`"

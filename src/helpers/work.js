@@ -1,4 +1,4 @@
-const Work =  [
+const Work = [
   { id: 1, name: 'Monetha', logo: 'src/images/placeholder.png', value: 'monetha', url: 'https://www.monetha.io/', description: '' },
   { id: 2, name: 'Base Camp', logo: 'src/images/placeholder.png', value: 'baseCamp', url: 'https://www.basecampstudent.com/', description: '' },
   { id: 3, name: 'Smart Plan', logo: 'src/images/placeholder.png', value: 'smartPlan', url: 'https://trysmartplan.com/', description: '' },
