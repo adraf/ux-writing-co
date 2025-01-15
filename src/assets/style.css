@@ -1,6 +1,10 @@
 :root {
 
   --background-color: #fffef6;
+  --highlight-color: #A13034;
+  --text-color: #1e1c1c;
+  --mid-highlight: #A7988B;
+
   /* font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
@@ -23,6 +27,7 @@ body {
   padding: 0;
   font-family: "Inter Tight", sans-serif;
   background-color: var(--background-color);
+  color: var(--text-color);
 }
 
 ul {

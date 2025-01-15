@@ -23,7 +23,7 @@ const { stop } = useIntersectionObserver(
 
     if (isIntersecting) {
       emit('section-in-view', target.value.id)
-      console.log('TARGET', targetIsVisible.value)
+      // console.log('TARGET', targetIsVisible.value)
     }
   },
   { threshold: 0.8 }, {immediate: false}
@@ -49,7 +49,8 @@ const openWorkInfo = async (workItem) => {
       <button
         v-for="work in work" :key="work.id"
         @click="chosenSlide(work)"
-        class="work__company_section_badge border-round-md border-none h-3rem cursor-pointer"
+        class="work__company_section_badge border-round-md h-4rem border-none cursor-pointer text-md"
+        style="color: var(--background-color);"
       >
         {{ work.name }}
       </button>
@@ -78,14 +79,18 @@ const openWorkInfo = async (workItem) => {
 
 <style scoped>
   .work__company_section {
-    max-width: 1000px;
     height: 95vh;
-    width: 95%;
+  }
+
+  .work_company_section_badge_conatiner {
+    max-width: 850px;
   }
 
   button {
     width: 150px;
     padding: 15px;
+    background: var(--highlight-color);
+    cursor: pointer;
   }
 
   .blurBg {
@@ -102,6 +107,7 @@ const openWorkInfo = async (workItem) => {
   .modal {
     padding: 10px;
     width: 80vw;
+    max-width: 800px;
     height: 30rem;
     background: beige;
     position: absolute;

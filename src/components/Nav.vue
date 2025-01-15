@@ -42,7 +42,7 @@
     },
     setup(props) {
       watchEffect(() => {
-        console.log('PROP', props.componentForNav)
+        // console.log('PROP', props.componentForNav)
         if (props.componentForNav !== '') {
           scrollToSectionScroll(props.componentForNav)
         }
@@ -53,7 +53,7 @@
 
   const scrollToSectionScroll = (event) => {
     event = event.split('').splice(9).join('')
-    console.log('EVENTNAME', event)
+    // console.log('EVENTNAME', event)
     boldFunc(event)
   }
 
@@ -101,9 +101,13 @@
     justify-content: space-evenly;
   }
 
+  .nav__list_item {
+    cursor: pointer;
+  }
   .activeNavTitle {
     font-weight: bold;
     transition: 0.5s ease-in-out;
+    color: var(--highlight-color);
   }
 
   @media (max-width: 768px) {

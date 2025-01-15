@@ -13,7 +13,7 @@ const { stop } = useIntersectionObserver(
 
       if (isIntersecting) {
         emit('section-in-view', target.value.id)
-        console.log('TARGET', targetIsVisible.value)
+        // console.log('TARGET', targetIsVisible.value)
       }
     },
     { threshold: 0.8 }, {immediate: false}
@@ -46,9 +46,12 @@ const { stop } = useIntersectionObserver(
   }
 
   h1 {
-    font-family: "Unna", serif;
+    /* font-family: "Unna", serif; */
     font-weight: 700;
     max-width: 800px;
+    align-self: left;
+    font-size: 5rem;
+    color: var(--highlight-color);
     /* margin: 20px auto; */
   }
 
@@ -65,7 +68,7 @@ const { stop } = useIntersectionObserver(
       padding-top: 20px;
     }
     h1 {
-      font-size: 2rem;
+      font-size: 3rem;
     }
   }
 </style>

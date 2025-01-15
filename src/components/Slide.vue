@@ -31,7 +31,7 @@
   }, { props })
 
   const openWork = (workItem) => {
-    console.log('EMIT ITEM', workItem)
+    // console.log('EMIT ITEM', workItem)
     emit('open-work-info', workItem)
   }
 
@@ -64,7 +64,7 @@
 <style scoped>
 
   .carousel__wrapper {
-    width: 95%;
+    /* width: 95%; */
     margin: 20px auto;
   }
 
@@ -74,6 +74,7 @@
     align-items: center;
     min-height: 16rem;
     width: 100%;
+    max-width: 500px;
     background-position: center;
     background-size: cover;
     border-radius: 8px;
@@ -99,7 +100,7 @@
     padding: 10px;
   }
 
-  .carousel__prev,
+  /* .carousel__prev,
   .carousel__next {
     box-sizing: content-box;
     padding: 10px;
@@ -113,15 +114,11 @@
   
   .carousel__next {
     background: linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,1));
-    right: -2.5rem !important;
+  } */
+  :deep(.carousel__prev), :deep(.carousel__next) {
+    display: none;
   }
-  :deep(.carousel__prev) {
-    left: -2.5rem !important;
-  }
-  :deep(.carousel__next) {
-    right: -2.5rem !important;
-  }
-
+ 
   @media (max-width: 768px) {
     .carousel__wrapper {
       width: calc(100% + 3rem);

@@ -11,7 +11,7 @@
 
   const componentInView = (componentInView) => {
     componentForNav.value = componentInView
-    console.log('componentInView, APP', componentInView)
+    // console.log('componentInView, APP', componentInView)
   }
 </script>
 

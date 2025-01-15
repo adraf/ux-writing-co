@@ -14,7 +14,7 @@ const { stop } = useIntersectionObserver(
 
       if (isIntersecting) {
         emit('section-in-view', target.value.id)
-        console.log('TARGET', targetIsVisible.value)
+        // console.log('TARGET', targetIsVisible.value)
       }
     },
     { threshold: 0.8 }, {immediate: false}

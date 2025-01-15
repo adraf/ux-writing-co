@@ -11,13 +11,13 @@
   const componentForNav = ref('')
   const sectionInView = (sectionInView) => {
     componentForNav.value = sectionInView
-    console.log('sectionInView, MAIN', sectionInView)
+    // console.log('sectionInView, MAIN', sectionInView)
   }
 
   watchEffect(() => {
     componentForNav.value,
     emit('component-in-view', componentForNav.value)
-    console.log('componentForNav, MAIN', componentForNav.value)
+    // console.log('componentForNav, MAIN', componentForNav.value)
   })
 
 </script>

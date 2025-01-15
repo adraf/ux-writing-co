@@ -13,7 +13,7 @@
   const windowWidth = ref(window.innerWidth)
   window.addEventListener('resize', () => {
     windowWidth.value = window.innerWidth
-    console.log('WINDOW WIDTH', windowWidth.value)
+    // console.log('WINDOW WIDTH', windowWidth.value)
   })
 
   const config = {
@@ -32,7 +32,7 @@
 
       if (isIntersecting) {
         emit('section-in-view', target.value.id)
-        console.log('TARGET', targetIsVisible.value, target.value.id)
+        // console.log('TARGET', targetIsVisible.value, target.value.id)
       }
     },
     { threshold: 0.8 }, {immediate: false}
@@ -93,7 +93,7 @@
 
   .testimonials__single-box {
     position: relative;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     width: 20rem;
     height: 20rem;
     display: flex;
@@ -102,23 +102,31 @@
     align-items: center;
     justify-content: center;
     padding: 0 25px;
+    background: var(--highlight-color);
+    color: var(--background-color);
+    border-radius: 16px;
   }
 
   .testimonials__quote-icons {
     position: absolute;
-    font-size: 150px;
+    font-size: 12rem;
     font-family: "Unna", serif;
     line-height: 0;
+    color: var(--text-color);
   }
 
   .start-quote {
-    top: 50px;
-    left: 0;
+    top: 5rem;
+    left: -20px;
   }
 
   .end-quote {
-    right: 0;
-    bottom: -10px;
+    right: -20px;
+    bottom: 0rem;
+  }
+
+  :deep(.carousel__prev), :deep(.carousel__next) {
+    display: none;
   }
 
   @media (max-width: 768px) {
@@ -143,12 +151,13 @@
     .testimonials__quote-icons {
       font-size: 100px;
     }
-    /* .start-quote {
-      top: 20px;
+    .start-quote {
+      top: 2.5rem;
+      left: 0;
     }
     .end-quote {
-      bottom: -15px;
-    } */
+      right: 0;
+    }
   }
 
 
