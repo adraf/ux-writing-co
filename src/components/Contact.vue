@@ -1,11 +1,12 @@
 <script setup>
-  import { nextTick, ref } from 'vue'
+  import { nextTick, ref, watch } from 'vue'
   import { useIntersectionObserver } from '@vueuse/core'
-
+  import { Button } from 'primevue'
   const emit = defineEmits(['section-in-view'])
   const target = ref(null)
   const targetIsVisible = ref(false)
-
+  const sentMessage = ref(false)
+  const formComplete = ref(false)
   const form = ref({
     email: '',
     name: '',
@@ -16,20 +17,41 @@
   const onSubmit = async (e) => {
     e.preventDefault();
     const contactForm = document.querySelector('.contact__form')
-    contactForm.reset()
+    await contactForm.reset()
+    sentMessage.value = true
+    // console.log('form submitted', form.value)
+    // nextTick(() => {
+    //   alert('Thank you for your message!')
+    // })
+    setTimeout(() => {
+      sentMessage.value = false
+    }, 5000)
     nextTick(() => {
-      alert('Thank you for your message!')
+      form.value = {
+        email: '',
+        name: '',
+        subject: '',
+        message: '',
+      }
+      formComplete.value = false
     })
   }
 
-const { stop } = useIntersectionObserver(
+  watch(form, (newVal) => {
+    if (newVal.email && newVal.name && newVal.subject) {
+      formComplete.value = true
+    } else {
+      formComplete.value = false
+    }
+  }, { deep: true })
+
+  const { stop } = useIntersectionObserver(
     target, 
     ([{ isIntersecting }], observerElement) => {
       targetIsVisible.value = isIntersecting
 
       if (isIntersecting) {
         emit('section-in-view', target.value.id)
-        // console.log('TARGET', targetIsVisible.value)
       }
     },
     { threshold: 0.8 }, {immediate: false}
@@ -47,8 +69,18 @@ const { stop } = useIntersectionObserver(
       <input v-model="form.subject" class="contact__form_input" id="input_subject" type="text" name="subject" placeholder="Subject" aria-label="Subject" required>
       <label class="contact__form_label" for="input_message">Further information</label>
       <textarea v-model="form.message" class="contact__form_input" id="input_message" aria-label="Message" name="message" form="contact__form" cols="30" rows="10" placeholder="Message"></textarea>
-      <input @click="onSubmit" class="contact__form_input" id="input_submit" type="submit" value="Send" aria-label="Send">
-      <!-- // TODO: add disabled unless forms are complete - remove @click to get required responses or add custom ones -->
+      <Button 
+        @click="onSubmit" 
+        class="contact__form_input" 
+        id="input_submit" 
+        type="submit" 
+        aria-label="Send"
+        :disabled="!formComplete"
+      >
+        <p v-if="sentMessage" class="p-0 m-0 mr-2 inline">Sent</p>
+        <p v-else class="p-0 m-0 inline">Send</p>
+        <i v-if="sentMessage" class="pi pi-send"></i>
+      </Button>
     </form>
   </section>
 </template>
@@ -95,15 +127,22 @@ const { stop } = useIntersectionObserver(
     outline-offset: 0px;
 
   }
-  #input_submit {
+  #input_submit:hover {
     border: 0.95px solid var(--highlight-color);
     color: var(--highlight-color);
+    background: var(--background-color);
   }
 
-  #input_submit:hover {
-    border: 1px solid var(--background-color);
+  #input_submit {
+    border: 0.95px solid var(--background-color);
     color: var(--background-color);
     background: var(--highlight-color);
+  }
+
+  #input_submit:disabled {
+    border: 0.95px solid var(--text-color);
+    color: var(--text-color);
+    background: var(--background-color);
   }
 
   #input_message {
