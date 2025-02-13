@@ -20,9 +20,7 @@
     await contactForm.reset()
     sentMessage.value = true
     // console.log('form submitted', form.value)
-    // nextTick(() => {
-    //   alert('Thank you for your message!')
-    // })
+  
     setTimeout(() => {
       sentMessage.value = false
     }, 5000)
@@ -60,6 +58,9 @@
 
 <template>
   <section ref="target" id="scrollTo_contact" class="contact__container">
+    <div class="flex align-items-start w-full">
+      <h2>Get in touch</h2>
+    </div>
     <form class="contact__form" id="contact__form" ref="contact" @submit.prevent>
       <label class="contact__form_label" for="input_name">Name <span class="required-field font-normal" style="color: var(--highlight-color)">&ast;</span></label>
       <input v-model="form.name" class="contact__form_input" id="input_name" type="text" name="name" placeholder="Name" aria-label="Name" required>
@@ -89,10 +90,12 @@
 
   .contact__container {
     display: flex;
-    height: 80vh;
+    height: 95vh;
     justify-content: center;
     align-items: center;
-    margin: 5rem 0;
+    margin: 5rem auto;
+    max-width: 800px;
+    flex-direction: column;
   }
   .contact__form {
     display: flex;

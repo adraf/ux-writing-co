@@ -4,16 +4,16 @@ import './assets/style.css'
 import './assets/scss/styles.scss'
 import '../node_modules/primeflex/primeflex.css'
 
-import PrimeVue from 'primevue/config';
+import PrimeVue from 'primevue/config'
 
-const app = createApp(App);
+const app = createApp(App)
 
 
-import Drawer from 'primevue/drawer';
-import Button from 'primevue/button';
-app.component('Drawer', Drawer);
-app.component('Button', Button);
+import Drawer from 'primevue/drawer'
+import Button from 'primevue/button'
+app.component('Drawer', Drawer)
+app.component('Button', Button)
 
-app.use(PrimeVue);
+app.use(PrimeVue)
 import 'primeicons/primeicons.css'
 createApp(App).mount('#app')

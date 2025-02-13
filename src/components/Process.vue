@@ -1,15 +1,17 @@
 <script setup>
-  import { ref } from 'vue'
+  import { ref, onMounted } from 'vue'
   import { useIntersectionObserver } from '@vueuse/core'
   import { Carousel, Navigation, Slide } from 'vue3-carousel'
   import 'vue3-carousel/dist/carousel.css'
   import Testimonials from '../helpers/tesimonials'
+  import Blobs from '../helpers/blobs'
 
   const emit = defineEmits(['section-in-view'])
   const target = ref(null)
   const targetIsVisible = ref(false)
   const testimonials = Testimonials
-
+  const blobs = Blobs
+  const randomBlobIndexes = ref([])
   const windowWidth = ref(window.innerWidth)
   window.addEventListener('resize', () => {
     windowWidth.value = window.innerWidth
@@ -24,6 +26,10 @@
     snapAlign: 'center'
   }
 
+  const getRandomBlob = () => Math.floor(Math.random() * 5)
+  onMounted(() => {
+    randomBlobIndexes.value = testimonials.map(() => getRandomBlob())
+  })
 
   const { stop } = useIntersectionObserver(
     target, 
@@ -32,7 +38,6 @@
 
       if (isIntersecting) {
         emit('section-in-view', target.value.id)
-        // console.log('TARGET', targetIsVisible.value, target.value.id)
       }
     },
     { threshold: 0.8 }, {immediate: false}
@@ -51,11 +56,21 @@
     <Carousel v-bind="config"
       :itemsToShow="windowWidth > 1220 ? 3 : windowWidth > 900 ? 2.25 : 1"
     >
-      <Slide v-for="testimonial in testimonials" :key="testimonial.id" @click="openWork(testimonial)">
+      <Slide v-for="(testimonial, index) in testimonials" :key="testimonial.id">
         <aside class="testimonials__single-box">
+          <div class="absolute top-0 left-0 w-full h-full z-0">
+
+            <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="background-color: var(--background-color);">
+              <path 
+                fill="var(--text-color)" 
+                :d="blobs[randomBlobIndexes[index]]?.code"
+                transform="translate(100 100)" 
+              />
+            </svg>
+          </div>
           <div class="testimonials__quote-icons start-quote">&#x201C;</div>
-          <p>{{ testimonial.comment }}</p>
-          <p>{{ testimonial.clientName }}, {{ testimonial.company }}</p>
+          <p class="z-1 blend">{{ testimonial.comment }}</p>
+          <p class="z-1 blend">{{ testimonial.clientName }}, {{ testimonial.company }}</p>
           <div class="testimonials__quote-icons end-quote">&#8221;</div>
         </aside>
       </Slide>
@@ -67,6 +82,11 @@
 </template>
 
 <style scoped>
+
+  .blend {
+    mix-blend-mode: exclusion;
+    color: var(--background-color);
+  }
 
   .process_container_all {
     display: flex;
@@ -81,19 +101,9 @@
     padding-top: 20px;
     margin: 0 auto;
   }
-  
-  /* .testimonials__container {
-    height: 40vh;
-    max-width: 900px;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    margin: 0 auto;
-  } */
 
   .testimonials__single-box {
     position: relative;
-    /* border: 1px solid black; */
     width: 20rem;
     height: 20rem;
     display: flex;
@@ -102,7 +112,6 @@
     align-items: center;
     justify-content: center;
     padding: 0 25px;
-    background: var(--highlight-color);
     color: var(--background-color);
     border-radius: 16px;
   }
