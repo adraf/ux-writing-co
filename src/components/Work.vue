@@ -12,8 +12,17 @@ const target = ref(null)
 const targetIsVisible = ref(false)
 const emit = defineEmits(['section-in-view'])
 
-const chosenSlide = (workData) => {
+const chosenSlide = (workData, element) => {
+  const selectedButtons = document.querySelectorAll('.selectedSlideButton')
+  selectedButtons.forEach(button => {
+    button.classList.remove('selectedSlideButton')
+  })  
   clickedSlide.value = workData
+  element.classList.add('selectedSlideButton')
+  setTimeout(() => {
+    clickedSlide.value = {}
+    element.classList.remove('selectedSlideButton')
+  }, 4500)
 }
 
 const { stop } = useIntersectionObserver(
@@ -23,7 +32,6 @@ const { stop } = useIntersectionObserver(
 
     if (isIntersecting) {
       emit('section-in-view', target.value.id)
-      // console.log('TARGET', targetIsVisible.value)
     }
   },
   { threshold: 0.8 }, {immediate: false}
@@ -48,7 +56,7 @@ const openWorkInfo = async (workItem) => {
     <div class="work_company_section_badge_conatiner flex align-items-center justify-content-center justify-content-evenly mx-auto flex-wrap md:w-10 md:h-10rem gap-3">
       <button
         v-for="work in work" :key="work.id"
-        @click="chosenSlide(work)"
+        @click="chosenSlide(work, $event.target)"
         class="work__company_section_badge border-round-md h-4rem border-none cursor-pointer text-md"
         style="color: var(--background-color);"
       >
@@ -109,12 +117,17 @@ const openWorkInfo = async (workItem) => {
     width: 80vw;
     max-width: 800px;
     height: 30rem;
-    background: beige;
+    background: var(--background-color);
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 1000;
+  }
+
+  .selectedSlideButton {
+    background-color: var(--mid-highlight);
+    color: black !important;
   }
 
   @media (max-width: 768px) {

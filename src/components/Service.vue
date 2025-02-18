@@ -63,7 +63,16 @@ const { stop } = useIntersectionObserver(
     max-width: 300px;
     height: 100%;
     text-align: center;
-    justify-content: space-around;
+    /* justify-content: space-around; */
+    justify-content: center;
+  }
+
+  .services__article:first-child {
+    justify-content: flex-start;
+  }
+
+  .services__article:last-child {
+    justify-content: flex-end;
   }
 
   .services__image {
@@ -71,6 +80,8 @@ const { stop } = useIntersectionObserver(
     max-width: 150px;
     height: auto;
     margin: 0 auto;
+
+    filter: invert(79%) sepia(2%) saturate(2374%) hue-rotate(347deg) brightness(80%) contrast(78%);
   }
 
   .servives__article_text-box {
@@ -90,8 +101,13 @@ const { stop } = useIntersectionObserver(
       flex-direction: column;
       width: 100%;
       margin: 0 auto;
+      justify-content: space-around;
       /* height: 16rem !important; */
     } 
+
+    .services__article:first-child, .services__article:last-child {
+      justify-content: space-around;
+    }
 
     .services__image {
       width: 60px;

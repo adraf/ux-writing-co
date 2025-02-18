@@ -58,7 +58,7 @@
 
 <template>
   <section ref="target" id="scrollTo_contact" class="contact__container">
-    <div class="flex align-items-start w-full">
+    <div class="w-full">
       <h2>Get in touch</h2>
     </div>
     <form class="contact__form" id="contact__form" ref="contact" @submit.prevent>
@@ -143,8 +143,8 @@
   }
 
   #input_submit:disabled {
-    border: 0.95px solid var(--text-color);
-    color: var(--text-color);
+    border: 0.95px solid var(--mid-highlight);
+    color: var(--mid-highlight);
     background: var(--background-color);
   }
 
@@ -155,11 +155,11 @@
 
 @media (max-width: 768px) {
   .contact__container {
-    height: 80vh;
+    height: 90vh;
   }
 
   .contact__form {
-    width: 85vw;
+    width: 90vw;
   }
 }
 </style>

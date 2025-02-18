@@ -1,7 +1,9 @@
 <script setup>
   import { ref } from 'vue'
   import { useIntersectionObserver } from '@vueuse/core'
+  import Blobs from '../helpers/blobs'
 
+  const blobs = Blobs
   const emit = defineEmits(['section-in-view'])
   const target = ref(null)
   const targetIsVisible = ref(false)
@@ -28,9 +30,18 @@ const { stop } = useIntersectionObserver(
       <p class="about__text">The short answer is that we&#39;re a collection of multi-disciplinary word nerds that have held nearly every type of job you could think of in the world of commercial writing.</p>
       <p class="about__text">We set up The UX Writing Company after realising just how many passionate teams, startups and products were being held back by imperfect copy. Since then we've made it our mission to help businesses of all shapes and sizes to realise their creative vision and deliver the best possible product into a competitive and noisy marketplace.</p>    
     </article>
-    <div class="mobile-images">
-      <div class="about__image_mobile image-left"></div>
-      <div class="about__image_mobile image-right"></div>
+    <div class="mobile-images relative">
+      <div class="absolute svg-box" style="display: flex; justify-content: center; align-items: center;">
+        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="background-color: var(--background-color);">
+          <path 
+            fill="var(--mid-highlight)" 
+            :d="blobs[0]?.code"
+            transform="translate(100 100)" 
+          />
+        </svg>
+      </div>
+      <div class="about__image_mobile image-left z-1"></div>
+      <div class="about__image_mobile image-right z-1"></div>
     </div>
     <div class="about__image image-left"></div>
     <div class="about__image image-right"></div>
@@ -84,7 +95,7 @@ const { stop } = useIntersectionObserver(
   @media (max-width: 768px) {
     .about__container {
       flex-direction: column;
-      height: 90vh;
+      height: 95vh;
       margin: 0 auto;
       padding-top: 20px;
     }
@@ -106,17 +117,39 @@ const { stop } = useIntersectionObserver(
     .mobile-images {
       display: flex;
       justify-content: space-between;
-      align-items: center;
       width: 100%;
-      height: auto;
+      height: 30rem;
+      /* align-items: center; */
+      /* height: auto; */
+    }
+
+    .svg-box {
+      z-index: 0;
+    }
+
+    .svg-box svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .about__image_mobile.image-left {
+      align-self: flex-start;
+      margin-left: 5%;
+    }
+
+    .about__image_mobile.image-right {
+      align-self: flex-end;
+      margin-right: 5%;
     }
 
     .about__image_mobile { 
-      width: 30vw;
-      height: 30vh;
+      width: 40%;
+      height: 14rem;
       background-position: 0% 25%;
       background-repeat: no-repeat;
       background-size: cover;
+      border-radius: 8px;
+      /* height: 35vh; */
     }
   }
 </style>

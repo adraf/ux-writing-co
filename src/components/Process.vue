@@ -140,7 +140,7 @@
 
   @media (max-width: 768px) {
     .process_container_all {
-      height: 120vh;
+      height: 110vh;
       padding-top: 20px;
     }
 
