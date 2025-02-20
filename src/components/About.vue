@@ -24,7 +24,7 @@ const { stop } = useIntersectionObserver(
 
 <template>
   <section ref="target" class="about__container" id="scrollTo_about">
-    <article class="about__article">
+    <article class="about__article border-round-md">
       <h2>And we are?</h2>
       <p class="about__text">Glad you asked...</p>
       <p class="about__text">The short answer is that we&#39;re a collection of multi-disciplinary word nerds that have held nearly every type of job you could think of in the world of commercial writing.</p>

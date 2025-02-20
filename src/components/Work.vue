@@ -14,6 +14,12 @@ const emit = defineEmits(['section-in-view'])
 
 const chosenSlide = (workData, element) => {
   const selectedButtons = document.querySelectorAll('.selectedSlideButton')
+  nextTick(() => {document.querySelector('.work__company_section').scrollIntoView({
+      behavior: "smooth",
+      block: "center",
+      inline: "center",
+    })
+  })
   selectedButtons.forEach(button => {
     button.classList.remove('selectedSlideButton')
   })  
@@ -22,7 +28,7 @@ const chosenSlide = (workData, element) => {
   setTimeout(() => {
     clickedSlide.value = {}
     element.classList.remove('selectedSlideButton')
-  }, 4500)
+  }, 3500)
 }
 
 const { stop } = useIntersectionObserver(
@@ -113,10 +119,10 @@ const openWorkInfo = async (workItem) => {
   }
 
   .modal {
-    padding: 10px;
+    padding: 10px 20px;
     width: 80vw;
     max-width: 800px;
-    height: 30rem;
+    /* height: 30rem; */
     background: var(--background-color);
     position: absolute;
     top: 50%;
@@ -135,6 +141,11 @@ const openWorkInfo = async (workItem) => {
       width: 100%;
       padding-top: 20px;
       height: 90vh;
+    }
+
+    .modal {
+      width: 90vw;
+      padding: 15px;
     }
   }
 </style>
