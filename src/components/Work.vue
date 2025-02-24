@@ -45,6 +45,7 @@ const { stop } = useIntersectionObserver(
 
 
 const openWorkInfo = async (workItem) => {
+  document.body.style.overflow = 'hidden';
   thisWork.value = await workItem
   showModal.value = true
   nextTick(() => {document.querySelector('.modal').scrollIntoView({
@@ -54,12 +55,21 @@ const openWorkInfo = async (workItem) => {
     })
   })
 }
+
+const closeModal = () => {
+  showModal.value = false
+  document.body.style.overflow = 'auto';
+}
+
 </script>
 
 <template>
   <section ref="target" class="work__company_section mx-auto align-content-evenly relative" id="scrollTo_work">
     <Slide :clicked-slide="clickedSlide" @open-work-info="openWorkInfo"></Slide>
-    <div class="work_company_section_badge_conatiner flex align-items-center justify-content-center justify-content-evenly mx-auto flex-wrap md:w-10 md:h-10rem gap-3">
+    <div class="work_company_section_badge_conatiner flex align-items-center justify-content-center justify-content-evenly mx-auto flex-wrap md:w-10 md:h-10rem gap-3"
+
+
+    >
       <button
         v-for="work in work" :key="work.id"
         @click="chosenSlide(work, $event.target)"
@@ -73,7 +83,7 @@ const openWorkInfo = async (workItem) => {
     <div class="modal border-round-md" v-if="showModal">
       <div class="w-100 flex justify-content-end">
         <button 
-          @click="showModal = false" 
+          @click="closeModal()" 
           class="flex align-items-center justify-content-center border-round-md border-none surface-ground mb-3" 
           style="width: 2rem; height: 2rem">
             <i class="pi pi-times"></i>
@@ -81,8 +91,9 @@ const openWorkInfo = async (workItem) => {
       </div>
       <div :style="{ 
         backgroundImage: `url(${thisWork.logo})`,
-        backgroundSize: 'cover',
+        backgroundSize: 'contain',
         backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat'
       }" class="h-14rem w-100"></div>
       <h2 class="text-center">{{ thisWork.name }}</h2>
       <p>{{ thisWork.description }}</p>
@@ -97,7 +108,7 @@ const openWorkInfo = async (workItem) => {
   }
 
   .work_company_section_badge_conatiner {
-    max-width: 850px;
+    max-width: 800px;
   }
 
   button {
@@ -116,19 +127,22 @@ const openWorkInfo = async (workItem) => {
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.4);
     backdrop-filter: blur(15px);
+
+    overflow: hidden !important;
   }
 
   .modal {
     padding: 10px 20px;
     width: 80vw;
     max-width: 800px;
-    /* height: 30rem; */
+    max-height: 70vh;
     background: var(--background-color);
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 1000;
+    overflow-y: auto;
   }
 
   .selectedSlideButton {

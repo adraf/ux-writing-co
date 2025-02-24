@@ -79,42 +79,33 @@
     background-size: cover;
     border-radius: 8px;
     position: relative;
+    background-color: var(--background-color);
   }
 
   .backdropBlur {
     position: absolute;
-    top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
     display: flex;
     justify-content: center;
-    align-items: center;
     background-color: rgba(0, 0, 0, 0.2);
-    color: white;
+    color: var(--background-color);
     font-size: 1.5rem;
     border-radius: 8px;
+    /* top: 0; */
+    /* height: 100%; */
+    /* align-items: center; */
+    align-items: flex-end;
+    bottom: 0;
+    height: 40%;
+    padding: 0 0 1rem 0;
+    mask-image: linear-gradient(to top,black 50%,transparent 100%);
   }
 
   .carousel__slide {
     padding: 10px;
   }
 
-  /* .carousel__prev,
-  .carousel__next {
-    box-sizing: content-box;
-    padding: 10px;
-    height: 90%;
-    margin: 0;
-  }
-  
-  .carousel__prev {
-    background: linear-gradient(to left, rgba(255,255,255,0), rgba(255,255,255,1));
-  }
-  
-  .carousel__next {
-    background: linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,1));
-  } */
   :deep(.carousel__prev), :deep(.carousel__next) {
     display: none;
   }
@@ -124,6 +115,14 @@
       width: calc(100% + 3rem);
       margin-left: -1.5rem;
     }
+    .carousel__item {
+      background-position: 20% 50%;
+    }
+
+    .backdropBlur {
+      height: 50%;
+    }
+
     :deep(.carousel__prev) {
       left: 0 !important;
     }

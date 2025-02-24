@@ -118,13 +118,18 @@ const { stop } = useIntersectionObserver(
       display: flex;
       justify-content: space-between;
       width: 100%;
-      height: 30rem;
+      height: 25rem;
       /* align-items: center; */
       /* height: auto; */
     }
 
     .svg-box {
       z-index: 0;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      height: 100%;
+      width: 100%;
     }
 
     .svg-box svg {
